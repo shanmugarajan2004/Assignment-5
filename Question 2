@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // open data.bin in read mode
+    FILE *data_file = fopen("data.bin", "rb");
+    if (data_file == NULL) {
+        printf("Error opening data.bin\n");
+        return 1;
+    }
+
+    // read the data from data.bin and print it to the console
+    int num_items;
+    fread(&num_items, sizeof(num_items), 1, data_file);
+    printf("Number of items: %d\n", num_items);
+
+    for (int i = 0; i < num_items; i++) {
+        int id;
+        float value;
+        fread(&id, sizeof(id), 1, data_file);
+        fread(&value, sizeof(value), 1, data_file);
+        printf("Item %d: ID=%d, value=%.2f\n", i+1, id, value);
+    }
+
+  
+    fclose(data_file);
+
+    return 0;
+}
