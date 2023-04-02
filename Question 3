@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    // open input.txt in read mode
+    FILE *input_file = fopen("input.txt", "r");
+    if (input_file == NULL) {
+        printf("Error opening input.txt\n");
+        return 1;
+    }
+
+    // open output.txt in write mode
+    FILE *output_file = fopen("output.txt", "w");
+    if (output_file == NULL) {
+        printf("Error opening output.txt\n");
+        return 1;
+    }
+
+    // read the contents of input.txt and replace "red" with "blue"
+    char line[100];
+    while (fgets(line, sizeof(line), input_file)) {
+        char *pos;
+        while ((pos = strstr(line, "red")) != NULL) {
+            strncpy(pos, "blue", 4);
+        }
+        fputs(line, output_file);
+    }
+
+    // close input.txt and output.txt
+    fclose(input_file);
+    fclose(output_file);
+
+    return 0;
+}
