@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+#define NUM_LETTERS 26
+
+int main() {
+    // open the data file in read mode
+    FILE *data_file = fopen("data.txt", "r");
+    if (data_file == NULL) {
+        printf("Error opening data.txt\n");
+        return 1;
+    }
+
+    // create the statistics file in write mode
+    FILE *statistics_file = fopen("statistics.txt", "w");
+    if (statistics_file == NULL) {
+        printf("Error creating statistics.txt\n");
+        return 1;
+    }
+
+    // initialize the frequency count array
+    int freq_count[NUM_LETTERS] = {0};
+
+    // read the data file and count the frequency of each letter
+    int c;
+    while ((c = fgetc(data_file)) != EOF) {
+        if (isalpha(c)) {
+            freq_count[tolower(c) - 'a']++;
+        }
+    }
+
+    // write the frequency counts to the statistics file
+    for (int i = 0; i < NUM_LETTERS; i++) {
+        fprintf(statistics_file, "%c: %d\n", i + 'a', freq_count[i]);
+    }
+
+    // close the data file and statistics file
+    fclose(data_file);
+    fclose(statistics_file);
+
+    return 0;
+}
