@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+   
+    FILE *input_file = fopen("input.txt", "r");
+    if (input_file == NULL) {
+        printf("Error opening input.txt\n");
+        return 1;
+    }
+
+    
+    FILE *error_log = fopen("error_log.txt", "w");
+    if (error_log == NULL) {
+        printf("Error opening error_log.txt\n");
+        return 1;
+    }
+
+   
+    char line[100];
+    while (fgets(line, sizeof(line), input_file)) {
+      
+        if (strstr(line, "error") != NULL) {
+           
+            fputs(line, error_log);
+        }
+    }
+
+
+    fclose(input_file);
+    fclose(error_log);
+
+  
+    FILE *error_file = fopen("error_log.txt", "r");
+    if (error_file == NULL) {
+        printf("Error opening error_log.txt\n");
+        return 1;
+    }
+
+  
+    printf("Contents of error_log.txt:\n");
+    while (fgets(line, sizeof(line), error_file)) {
+        printf("%s", line);
+    }
+
+   
+   #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    
+    FILE *input_file = fopen("input.txt", "r");
+    if (input_file == NULL) {
+        printf("Error opening input.txt\n");
+        return 1;
+    }
+
+  
+    FILE *error_log = fopen("error_log.txt", "w");
+    if (error_log == NULL) {
+        printf("Error opening error_log.txt\n");
+        return 1;
+    }
+
+   
+    char line[100];
+    while (fgets(line, sizeof(line), input_file)) {
+      
+        if (strstr(line, "error") != NULL) {
+          
+            fputs(line, error_log);
+        }
+    }
+
+   
+    fclose(input_file);
+    fclose(error_log);
+
+  
+    FILE *error_file = fopen("error_log.txt", "r");
+    if (error_file == NULL) {
+        printf("Error opening error_log.txt\n");
+        return 1;
+    }
+
+   
+    printf("Contents of error_log.txt:\n");
+    while (fgets(line, sizeof(line), error_file)) {
+        printf("%s", line);
+    }
+
+    
+   
+
